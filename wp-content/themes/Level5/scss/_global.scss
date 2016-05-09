@@ -1,0 +1,246 @@
+/*
+//       _/_/_/  _/          _/_/    _/_/_/      _/_/    _/
+//    _/        _/        _/    _/  _/    _/  _/    _/  _/
+//   _/  _/_/  _/        _/    _/  _/_/_/    _/_/_/_/  _/
+//  _/    _/  _/        _/    _/  _/    _/  _/    _/  _/
+//   _/_/_/  _/_/_/_/    _/_/    _/_/_/    _/    _/  _/_/_/_/
+*/
+
+/* ==========================================================================
+   Links, Headings, Paragraphs, HR's, Lists, Blockquotes
+   ========================================================================== */
+
+.screen-reader-text { display: none; }
+
+h1, h2, h3, h4, h5 { padding: 10px 0; }
+h1 { 
+  @include nunito_reg; @include font-size(5,6); letter-spacing: 5px; text-transform: uppercase; 
+  @include respond-to($bp6) { @include font-size(3,4); }
+}
+h2 { 
+  @include bitter_reg; @include font-size(1.8,3.2); letter-spacing: 2px; 
+  @inclue respond-to($bp6) { @include font-size(1.6,2.8); }
+}
+h3 { @include bitter_reg; @include font-size(3,4); text-transform: uppercase; letter-spacing: 3px; }
+h4 { @include bitter_reg; @include font-size(2.4,3.4); text-transform: uppercase; letter-spacing: 1px; }
+h5 { @include bitter_reg; @include font-size(1.8,2.0); text-transform: uppercase; }
+h6 { @extend h5; }
+p { 
+  padding: 10px 0; @include nunito_reg; @include font-size(1.4,2.2); 
+  @include respond-to($bp6) { @include font-size(1.6,2.2); }
+}
+span { @include nunito_reg; @include font-size(1.4,2.2); }
+strong, b { font-weight: 700; }
+a, .autoLink a {
+  text-decoration: none; outline: none; color: $blue; @include transition; @include boop;
+  &:hover, &:focus { color: darken($blue, 10%); }
+}
+
+hr { color: purple; }
+
+ul, ol {
+  padding-left: 20px; list-style-position: inside;
+  li {
+    @include nunito_reg; @include font-size(1.4,2.2);
+  }
+}
+ul { list-style-type: disc; }
+ol { list-style-type: decimal; }
+
+ul.grid {
+  @include cf; @include plain;
+}
+
+blockquote, { 
+  @extend em; display: block; padding: 0 25px; @include bitter_reg; @include font-size(2.2,3.4); position: relative; text-align: center; margin-bottom: 4px;
+  p, span, strong, em, i, b { font-family: inherit; font-size: inherit; line-height: inherit; }
+  &:after {
+    content: ''; @include align(horizontal); top: 100%; width: 112px; height: 4px; background: $blue;
+  }
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.button, button, input[type="submit"] {
+  display: inline-block; color: white; background: $blue; text-transform: uppercase; @include nunito_reg; @include font-size(1.6,4); white-space: nowrap; padding: 0 45px; @include boop; @include transition; outline: none !important; -webkit-appearance: none; border: 0;
+  &:hover, &:focus { color: darken(white, 10%); background: darken($blue, 10%); }
+  //&.small { @include font-size(1.4,3.4); border-width: 1px; border-radius: 4px; }
+  //&.thin { @include font-size(1.2,2.9); border-width: 1px; border-radius: 4px; }
+  //&.large { @include font-size(1.8,7.6); padding: 0 85px; @include space_letters(.3); border-radius: 5px; border-width: 1px; }
+  //&.snug { padding: 0 19px; }
+  //&.long { padding: 0 49px; }
+  &.round { border-radius: 5px; }
+  &.clear { 
+    background: transparent; border: 3px solid white;
+    &:hover, &:focus { background: white; color: $gray-dark; }
+  }
+  &.gray {
+    background: $gray-light; color: $gray-dark;
+    &:hover, &:focus { background: darken($gray-light, 1.5%); }
+  }
+}
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+
+//standard forms
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+textarea {
+  width: 100%; height: 48px; margin-bottom: 8px; padding: 16px 19px;
+  color: $gray-med; background: $gray-light; border: 0; outline: 0; box-shadow: none;
+  @include nunito_reg; @include font-size(1.4,2.2);
+
+  &:focus {
+    background: darken($gray-light,2%);
+  }
+}
+
+textarea {
+  height: 257px; 
+}
+
+::-webkit-input-placeholder { text-transform: uppercase; color: $gray-med; -webkit-font-smoothing: antialiased; @include nunito_reg; @include font-size(1.4,2.2); }
+::-moz-placeholder { text-transform: uppercase; color: $gray-med; -moz-osx-grayscale: antialiased; @include nunito_reg; @include font-size(1.4,2.2); }
+:-ms-input-placeholder { text-transform: uppercase; color: $gray-med; @include nunito_reg; @include font-size(1.4,2.2); }
+input:-moz-placeholder { text-transform: uppercase; color: $gray-med; -moz-osx-grayscale: antialiased; @include nunito_reg; @include font-size(1.4,2.2); }
+
+
+form {
+  .gform_body {
+    margin-left: 0 !important;
+    ul {
+      @include plain;
+      li {
+        label {
+          &.gfield_label { display: none; }
+          &.label-floatlabel { @include nunito_bold; @include font-size(1.0); text-transform: uppercase; letter-spacing: 1px; top: 3px !important; left: 20px !important; }
+        }
+        &.focused { 
+          .floatlabel-wrapper {
+            label.label-floatlabel { color: $blue !important; }
+          }
+        }       
+      }
+    }
+  }
+  .gform_footer {
+    margin-left: 0 !important;
+  }
+}
+
+
+
+
+span.gfield_required { display: none; }
+
+.gform_ajax_spinner { display: none; }
+
+
+/* Success */
+.gform_confirmation_message {
+  @include nunito_reg; @include font-size(1.6,2.4); color: $blue; background: $gray-light; padding: 20px; text-align: center;
+}
+
+/* Errors */
+.validation_error {
+  @include nunito_reg; @include font-size(1.4,2.2); margin-top: 14px; margin-bottom: 20px !important; color: #fff; padding: 8px 10px;  background: $gray-dark;
+}
+.gfield_error {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="password"],
+  input[type="search"],
+  textarea { 
+    
+  }  
+  //::-webkit-input-placeholder { color: $red !important; -webkit-font-smoothing: antialiased; }
+  //::-moz-placeholder { color: $red !important; -moz-osx-grayscale: antialiased; }
+  //:-ms-input-placeholder { color: $red !important; }
+  //input:-moz-placeholder { color: $red !important; -moz-osx-grayscale: antialiased; }
+}
+.gfield_description {
+  &.validation_message { color: #fff; position: relative; bottom: 6px; background: $gray-dark; padding: 5px 10px; margin: -2px 0 0 0 !important; }
+}
+
+//contact page form
+#gform_2 {
+  .gfield {
+    &:nth-of-type(1),
+    &:nth-of-type(3) { width: 50%; }
+    &:nth-of-type(2),
+    &:nth-of-type(4) { width: calc(50% - 8px); margin-left: 8px; }    
+    &:nth-of-type(-n+4) { float: left; }
+  }
+  .gfield.gfield_error + .gfield { min-height: 90px; }
+
+  @include respond-to(370px) {
+    .gfield {
+      float: none !important; width: 100% !important; margin-left: 0 !important;
+    }
+    .gfield.gfield_error + .gfield { min-height: auto; }    
+  }
+}
+
+//homepage form
+
+body.page-id-13 {
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="password"],
+  input[type="search"],
+  textarea {
+    width: 100%; height: 62px; margin-bottom: 20px; padding: 21px 22px 19px; border: 2px solid white;
+    color: white; background: transparent;
+    &:focus {
+      background: rgba(white,0.05);
+    }
+  }
+  textarea { height: 228px; }
+  ::-webkit-input-placeholder { color: white; -webkit-font-smoothing: antialiased; @include nunito_bold; @include font-size(1.5,2.3); }
+  ::-moz-placeholder { color: white; -moz-osx-grayscale: antialiased; @include nunito_bold; @include font-size(1.5,2.3); }
+  :-ms-input-placeholder { color: white; @include nunito_bold; @include font-size(1.5,2.3); }
+  input:-moz-placeholder { color: white; -moz-osx-grayscale: antialiased; @include nunito_bold; @include font-size(1.5,2.3); }
+  
+  form .gform_body ul li label.label-floatlabel { font-size: 13px !important; color: white !important; top: 6px !important; left: 25px !important; }      
+
+  .gfield_description {
+    &.validation_message { bottom: 18px; }
+  }
+
+  .gform_confirmation_message {
+    @include nunito_reg; @include font-size(1.6,2.4); color: $blue; background: $gray-light; padding: 20px; text-align: center;
+  }  
+}
+
+//blog forms
+
+body.blog, body.single-post, body.archive, body.search {
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="password"],
+  input[type="search"],
+  textarea {
+    background: $gray-dark; color: white;
+  }
+  ::-webkit-input-placeholder { color: white; text-transform: none; }
+  ::-moz-placeholder { color: white; text-transform: none; }
+  :-ms-input-placeholder { color: white; text-transform: none; }
+  input:-moz-placeholder { color: white; text-transform: none; }
+}

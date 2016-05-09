@@ -1,0 +1,272 @@
+/*
+//      _/      _/    _/_/    _/_/_/  _/      _/
+//     _/_/  _/_/  _/    _/    _/    _/_/    _/
+//    _/  _/  _/  _/_/_/_/    _/    _/  _/  _/
+//   _/      _/  _/    _/    _/    _/    _/_/
+//  _/      _/  _/    _/  _/_/_/  _/      _/
+*/
+
+/* ==========================================================================
+   Body & Wrapper
+   ========================================================================== */
+
+html {
+  font-size: 62.5% !important;
+  @include respond-to($bp1) { font-size: 62% !important; }
+  @include respond-to($bp2) { font-size: 58% !important; }
+  @include respond-to($bp4) { font-size: 55% !important; }
+}
+
+body {
+  overflow-x: hidden;
+  #page {
+    @include respond-to(700px) {
+      padding-top: 72px;
+    }
+  }
+}
+
+.container {
+  max-width: 1160px; position: relative; text-align: center; padding: 0 20px; margin: 0 auto; @include cf;
+}
+
+/* ==========================================================================
+   Site Header
+   ========================================================================== */
+
+#site-header {
+  position: absolute; top: 0; left: 0; width: 100%; z-index: 1;
+  .site-logo {
+    float: left; margin-top: 8px;
+  }
+  #mobile-menu-toggle {
+    display: none; color: white; position: absolute; right: 0; font-size: 34px; line-height: 34px; padding: 17px;
+  }
+  #site-navigation {
+    float: right;
+    ul {
+      @include plain; @include cf; padding: 21px 0;
+      li {
+        @include plain; float: left; position: relative;
+        a {
+          @include nunito_bold; @include font-size(1.5,2.5); text-transform: uppercase; letter-spacing: 1px; color: white; display: block; padding: 2px 30px;
+          &:after { content: ''; display: block; @include align(horizontal); bottom: 0; width: 50px; height: 5px; background: $blue; opacity: 0; max-height: 0; overflow: hidden; @include transition(all, .3s, ease); }
+          &:hover, &:focus {
+            &:after { opacity: 1; max-height: 5px; }
+          }
+        }
+
+        &.current-menu-item {
+          &:after { content: ''; display: block; @include align(horizontal); bottom: 0; width: 50px; height: 5px; background: $blue; }
+        }
+        &.menu-item-168 {
+          a {
+            border: 3px solid white; position: relative; top: -3px; margin-left: 4px; padding: 2px 28px;
+            &:hover, &:focus { border-color: $blue; }
+            &:after { display: none; }
+          }
+          &:after { display: none; }
+        }
+      }
+    }
+  }
+
+  @include respond-to(880px) {
+    .site-logo { float: none; }
+    #site-navigation { float: none; display: inline-block; margin: 0 auto; }
+  }
+  @include respond-to(700px) {
+    background: $gray-dark; padding-bottom: 10px; position: fixed; z-index: 9999;
+    .site-logo { float: left; }
+    #mobile-menu-toggle {
+      display: block; @include cursor;
+      &:hover, &:focus { color: $blue; }
+    }
+    #site-navigation {
+      @include transition(max-height,.3s,$ease-out-quint); @include transition-delay(100ms);
+      max-height: 0; overflow: hidden; position: absolute; top: 100%; left: 0; right: 0; background: $gray-dark;
+      ul {
+        padding: 10px 0 0;
+        li {
+          float: none; border-top: 1px solid rgba($gray-light,.1);
+          a {
+            @include transition; @include transition-delay(0s);
+            opacity: 0; padding: 10px 30px !important; line-height: 25px; //rem line-height was weird
+            &:hover, &:focus { color: $blue; }
+          }
+          &.current-menu-item {
+            &:after { height: 2px; width: 100px; }
+          }
+          &.menu-item-168 {
+            a {
+              border: none; position: static; margin-left: 0;
+            }
+          }
+        }
+      }
+      &.expanded {
+        max-height: 311px; @include transition-delay(0s); @include transition-timing-function($ease-in-quint);
+        ul li a { opacity: 1; @include transition-delay(0s); }
+      }
+    }
+  }
+
+  //stop logged-in annoyance
+  &.offset-by-admin-bar {
+    margin-top: 32px;
+    @include respond-to(782px) {
+      margin-top: 46px;
+    }
+    @include respond-to($bp5) {
+      margin-top: 0; margin-bottom: -46px;
+    }
+  }
+}
+
+body.archive,
+body.search,
+body.single-post {
+  #site-header #site-navigation ul li.menu-item-162:after { content: ''; display: block; @include align(horizontal); bottom: 0; width: 50px; height: 5px; background: $blue; }
+}
+
+/* ==========================================================================
+   Page Header
+   ========================================================================== */
+
+#page-header {
+
+  //request by Maddie
+  @include respond-above(1025px) {
+    .container { height: 100vh; }
+    .page-header-content {
+      padding: 64px 0 0 !important; @include align(vertical);
+    }
+  }
+
+  color: white; background-position: center center; background-repeat: no-repeat; background-size: cover;
+  .page-header-content {
+    padding: calc(64px + 17%) 0 17%;
+    h2 { max-width: 780px; margin: 0 auto; padding-top: 0; }
+    .button { margin-top: 8px; }
+    @include respond-to(880px) { padding: calc(115px + 15%) 0 15%; }
+    @include respond-to(700px) { padding: 12% 0; }
+  }
+
+  &.no-hero-img { background: $gray-med; }
+}
+
+/* ==========================================================================
+   Page Content
+   ========================================================================== */
+
+#content {
+  color: $gray-med;
+  section.content {
+    padding: 7.14% 0; //80px @ container max-width;
+    &.white { background: white; }
+    &.gray { background: $gray-light; }
+    &.no-bg-img { background-color: $gray-med;}
+  }
+  h3.home-section-heading { 
+    padding-top: 40px; color: $gray-darkest; letter-spacing: 5px;
+  }
+  h3.section-heading {
+    text-align: left; color: $gray-darkest; position: relative;
+    &:after {
+      content: ''; position: absolute; left: 2px; bottom: -6px; height: 4px; width: 112px; background: $blue;
+    }
+  }
+  p:not(.description) { text-align: left; }
+  .two-col {
+    @include cf; @include generate_grid_positions(div,6);
+    .col {
+      @include column(6);
+      &.col-1 { padding-right: 16px; /*1.43%;*/  } //16px @ container max-width;
+      &.col-2 { padding-left: 16px; /*1.43%;*/ }
+    }
+
+    @include respond-to($bp3) {
+      @include generate_grid_positions(div, 12);
+      .col {
+        @include column(12);
+        &.col-1 { padding-right: 0; padding-bottom: 28px; }
+        &.col-2 { padding-left: 0; }
+      }
+    }
+  }
+}
+
+/* ==========================================================================
+   Site Footer
+   ========================================================================== */
+
+#site-footer {
+  background: $gray-dark; color: white; padding: 6% 0;
+  .container {
+    @include display(flex); @include justify-content(space-around);
+    .footer-block {
+      display: inline-block; vertical-align: top; text-align: left; padding: 0 30px;
+      &:first-of-type { padding-left: 0; }
+      &:last-of-type { padding-right: 0; }
+      ul {
+        @include plain;
+        &:not(.social-links) {
+          li { padding: 4px 0; }
+        }
+      }
+      a:not(.button), .autoLinks a {
+        color: white;
+        &:hover, &:focus {
+          color: $blue;
+        }
+      }
+      &:not(.action) {
+        h5 { padding-bottom: 25px; }
+      }
+      &.service-menu {
+        @include respond-above($bp2){
+          max-width: 300px;
+        }
+      }
+      &.action {
+        h5 {
+          position: relative;
+          &:after {
+            content: ''; position: absolute; bottom: 5px; left: 0; right: 0; height: 2px; background: darken(white,15%);
+          }
+        }
+        ul.social-links {
+          padding: 8px 0 22px;
+          li {
+            display: inline-block; margin: 0 3px;
+            a {
+              display: block; width: 30px; height: 30px; line-height: 30px; text-align: center; border-radius: 50%; background: white; color: $gray-dark; border: 2px solid white;
+              &:hover, &:focus {
+                background: $blue; border-color: $blue; color: #fff;
+              }
+            }
+          }
+        }
+        a.button {
+          margin-top: 9px;
+          &:hover, &:focus { background: transparent; border-color: $blue; color: $blue; }
+        }
+      }
+    }
+  }
+  @include respond-to($bp2) {
+    .container {
+      @include flex-wrap(wrap);
+      .footer-block {
+        padding: 0 20px 20px !important; width: 50%;
+      }
+    }
+  }
+  @include respond-to($bp6) {
+    .container {
+      .footer-block {
+        width: 100%;
+      }
+    }
+  }
+}
