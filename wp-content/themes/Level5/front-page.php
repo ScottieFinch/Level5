@@ -5,36 +5,42 @@
 
 get_header(); ?>
 
+<script src="wp-content/themes/Level5/js/parallax.min.js"></script>
 <?php
  //Vars
 
 	//Feature Highlights Section
 
-		$feature_highlights_title = get_field('feature_highlights_title');
-		$feature_highlights_subtitle = get_field('feature_highlights_subtitle');
+		$employee_image = get_field('employee_image');
+		$employee_name = get_field('employee_name');
+		$employee_title = get_field('employee_title');
+		$employee_quote = get_field('employee_quote');
 
-    $feature_list_title = get_field('feature_list_title');
-		$feature_list_subtitle = get_field('feature_list_subtitle');
-	  $feature_list_image = get_field('feature_list_image');
+		$philosophy_title = get_field('philosophy_title');
+		$philosophy_description = get_field('philosophy_description');
 
-    $integrations_title = get_field('feature_list_title');
-		$integrations_subtitle = get_field('feature_list_subtitle');
 ?>
 
+<div class="parallax-window" data-parallax="scroll" data-position="top" data-bleed="10" data-image-src="wp-content/themes/Level5/img/Mazuma-interior.jpg" data-natural-width="1400" data-natural-height="900" style="height: 350px;"></div>
 
-<section id="feature-highlights">
-  <div class="container">
+<section id="philosophy">
+	<div class="notched-background">
+  	<div class="container">
+			<div class="philosophy-left">
+				<span><?= $employee_name ?></span></br>
+				<span><?= $employee_title ?></span>
+				<p><?= $employee_quote ?></p>
+			</div>
+			<div class="philosophy-right">
+				<h3><?= $philosophy_title ?></h3>
+				<p><?= $philosophy_description ?></p>
 
-    <header>
-    	<h3><?= $feature_highlights_title ?></h3>
-    	<?= $feature_highlights_subtitle ? '<p class="description">'.$feature_highlights_subtitle.'</p>' : '' ?>
-    </header>
-
-    <?php include_once('inc-feature-highlights.php'); ?>
-
+			</div>
+		</div>
   </div>
 </section>
 
+<div class="parallax-window" data-parallax="scroll" data-position="top" data-bleed="10" data-image-src="wp-content/themes/Level5/img/BearStateBank-243.jpg" data-natural-width="1400" data-natural-height="900" style="height: 350px;"></div>
 
 <section id="feature-list">
   <div class="container">
@@ -80,7 +86,6 @@ get_header(); ?>
   </div>
 </section>
 
-<?php include_once('inc-cta-section.php'); ?>
 
 
 <?php get_footer(); ?>

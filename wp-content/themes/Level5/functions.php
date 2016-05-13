@@ -44,17 +44,12 @@ function level5_setup() {
 
 
 	/* img sizes */
-	add_image_size( 'home-menu-logo', 162, 9999, false);
-	add_image_size( 'home-employee', 259, 289, true);
-	add_image_size( 'related-thumbnail', 206, 136, true);
-	add_image_size( 'client-logo', 300, 9999, false);
-	add_image_size( 'appraisal-image', 600, 9999, false);
-  add_image_size( 'featured-image', 667, 348, false);
-	add_image_size( 'grid-employee', 162, 188, true);
-   
+	add_image_size( 'portfolio', 300, 9999, false);
+
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
 		'primary' => esc_html__( 'Primary', 'level5' ),
+		'secondary' => esc_html__( 'Secondary', 'level5' ),
 	) );
 
 	/*
@@ -112,7 +107,7 @@ add_action( 'widgets_init', 'level5_widgets_init' );
  * Enqueue scripts and styles.
  */
 function level5_scripts() {
-	
+
 	wp_enqueue_style( 'level5-style', get_template_directory_uri() . '/css/style.css', array(), '20160216' );
 	wp_enqueue_style( 'market-wake-styles', get_stylesheet_uri(), array('level5-style') );
 
@@ -127,6 +122,7 @@ function level5_scripts() {
 	//	wp_enqueue_script( 'comment-reply' );
 	//}
 }
+
 add_action( 'wp_enqueue_scripts', 'level5_scripts' );
 
 /**
