@@ -30,7 +30,8 @@ get_header(); ?>
 
 		<li>
 			<img class="modal-image" src="<?= $image['sizes']['portfolio'] ?>">
-			<div class="hidden image-set">
+			<div class="hidden image-set-box">
+			<div class="image-set">
 				<img class="image-set-image" src="/wordpress/wp-content/themes/level5/img/<?= $label ?>/<?= $label ?>-1.jpg">
 				<img class="image-set-image" src="/wordpress/wp-content/themes/level5/img/<?= $label ?>/<?= $label ?>-2.jpg">
 				<img class="image-set-image" src="/wordpress/wp-content/themes/level5/img/<?= $label ?>/<?= $label ?>-3.jpg">
@@ -38,6 +39,7 @@ get_header(); ?>
 				<img class="image-set-image" src="/wordpress/wp-content/themes/level5/img/<?= $label ?>/<?= $label ?>-5.jpg">
 				<img class="image-set-image" src="/wordpress/wp-content/themes/level5/img/<?= $label ?>/<?= $label ?>-6.jpg">
 				<img class="image-set-image" src="/wordpress/wp-content/themes/level5/img/<?= $label ?>/<?= $label ?>-7.jpg">
+			</div>
 			</div>
 		</li>
 
@@ -50,19 +52,30 @@ get_header(); ?>
 </section>
 
 <script>
-jQuery('.image-set .image-set-image').slick({
-  dots: true,
-  infinite: true,
-  speed: 500,
-  fade: true,
-  cssEase: 'linear'
-});
-
+jQuery(document).ready(function () {
 	jQuery('.imgContain').on("click","li", function (e) {
-		var content = jQuery(this).find(".image-set").clone();
+		var content = jQuery(this).find(".image-set-box").clone();
 		content.removeClass('hidden');
-			vex.open({content:  content});
+		vex.open({
+			content:  content,
+			afterOpen: function() {
+				jQuery('.vex-content .image-set').slick({
+					dots: true,
+					infinite: true,
+					speed: 500,
+					fade: true,
+					cssEase: 'linear',
+					arrows: false,
+					autoplay: true
+				});
+				console.log('here');
+			}
+		});
+
+
+
 	});
+});
 </script>
 
 <?php get_footer(); ?>

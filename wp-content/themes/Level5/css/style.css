@@ -881,7 +881,14 @@ input:-moz-placeholder {
 .hidden{
   display: none;
 }
+.image-set-image{
+  max-height: 800px;
+  margin-top: 20px;
+}
 
+.vex-content{
+  width: 100% !important;
+}
 #secondary-menu{
   margin-top: 80px;
   float: left;
